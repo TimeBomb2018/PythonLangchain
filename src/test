@@ -1,0 +1,287 @@
+app:
+  description: null
+  icon: null
+  icon_type: null
+  name: 世通千问
+  tags: []
+  type: workflow
+exported_at: '2026-05-22T07:24:29'
+platform: MemoryBear
+version: v0.2.9
+workflow:
+  edges:
+  - condition: null
+    id: null
+    label: CASE2
+    source: '1778492436169'
+    target: '1778491615669'
+    type: null
+  - condition: null
+    id: null
+    label: CASE1
+    source: '1778492436169'
+    target: answer-fallback
+    type: null
+  - condition: null
+    id: null
+    label: SUCCESS
+    source: '1778492273490'
+    target: '1778492436169'
+    type: null
+  - condition: null
+    id: null
+    label: null
+    source: start
+    target: code-split
+    type: null
+  - condition: null
+    id: null
+    label: null
+    source: code-split
+    target: iteration_1779433206572_0dkdbuvxn
+    type: null
+  - condition: null
+    id: null
+    label: null
+    source: iteration_1779433206572_0dkdbuvxn
+    target: '1778492273490'
+    type: null
+  execution_config:
+    enable_cache: true
+    max_iterations: 100
+    parallel_limit: 5
+    timeout: 600
+  features:
+    citation:
+      enabled: true
+    file_upload:
+      allowed_transfer_methods: both
+      audio_allowed_extensions:
+      - mp3
+      - wav
+      - m4a
+      audio_enabled: false
+      audio_max_size_mb: 50
+      document_allowed_extensions:
+      - pdf
+      - docx
+      - doc
+      - xlsx
+      - xls
+      - txt
+      - csv
+      - json
+      - md
+      document_enabled: false
+      document_max_size_mb: 200
+      enabled: false
+      image_allowed_extensions:
+      - png
+      - jpg
+      - jpeg
+      image_enabled: true
+      image_max_size_mb: 10
+      max_file_count: 3
+      video_allowed_extensions:
+      - mp4
+      - mov
+      video_enabled: false
+      video_max_size_mb: 100
+    opening_statement:
+      enabled: false
+      statement: null
+      suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      autoplay: false
+      enabled: false
+      language: ''
+      voice: ''
+  nodes:
+  - cache: null
+    config:
+      cases:
+      - expressions:
+        - input_type: constant
+          left: '{{1778492273490.output}}'
+          operator: contains
+          right: 暂未检索
+          sub_variable_condition: null
+        logical_operator: and
+    cycle: null
+    description: null
+    error_handling: null
+    id: '1778492436169'
+    name: 条件分支
+    position:
+      x: 1672.375032950151
+      y: 211.74054429688596
+    type: if-else
+  - cache: null
+    config:
+      context: '{{iteration.output}}'
+      error_handle:
+        method: none
+        output: ''
+      json_output: false
+      max_tokens: 1000
+      memory:
+        enable: true
+        enable_window: true
+        window_size: 50
+      messages:
+      - content: "你是\"世通千问\"，服务于世通国际认证公司的认证与绿色低碳业务。你的任务不是自由创作答案，而是基于知识库内容为客户提供专业、稳妥、结构化的回答。\n\
+          \n## 回答规则\n\n1. 优先从知识库中检索答案，保留原文中的emoji表情和格式。\n2. 若知识库存在匹配内容，按以下结构输出回答：\n\
+          \   - **直接回答**：1-2句话回答核心问题\n   - **摘要解读**：展开说明要点、流程或清单\n   - **下一步建议**：给出客户可执行的下一步行动\n\
+          3. 若知识库中无相关答案，只输出：当前暂未检索到足够依据，无法给出准确答复。建议您补充问题信息，或联系世通顾问获取协助。\n4. 必须结合用户与助手的真实对话历史理解上下文。\n\
+          5. 不得编造政策、标准条款、认证规则、费用、周期或证书结果。\n6. 涉及费用、周期、能否通过、奖补、合规风险等问题时，在回答末尾提示：该问题涉及企业具体条件，建议联系世通顾问进一步确认。\n\
+          7. 不得承诺保证通过、包过、免审、快速违规拿证。\n\n## 当前领域\n用户当前选择的业务领域：{{start.selected_domain}}\n\
+          - 如果是 management，以管理体系认证视角为主回答\n- 如果是 green_lowcarbon，以绿色低碳项目视角为主回答\n- 跨领域问题可适当引用另一领域知识作为补充\n\
+          \n## 知识库内容\n{{context}}"
+        role: system
+      - content: '{{sys.message}}'
+        role: USER
+      model_ref:
+        id: ee891b99-ecb4-464f-8173-65f966facbac
+        name: qwen-plus
+        provider: dashscope
+        type: llm
+      temperature: 0.1
+    cycle: null
+    description: null
+    error_handling: null
+    id: '1778492273490'
+    name: LLM 2
+    position:
+      x: 1372.9711715885428
+      y: 252.0
+    type: llm
+  - cache: null
+    config:
+      output: '{{1778492273490.output}}'
+    cycle: null
+    description: null
+    error_handling: null
+    id: '1778491615669'
+    name: 回答
+    position:
+      x: 2017.0288284114572
+      y: 340.35572614211014
+    type: end
+  - cache: null
+    config:
+      output: 当前暂未检索到足够依据，无法给出准确答复。建议您补充问题信息，或联系世通顾问获取协助。
+    cycle: null
+    description: null
+    error_handling: null
+    id: answer-fallback
+    name: 兜底回答
+    position:
+      x: 2000.0
+      y: 100.0
+    type: end
+  - cache: null
+    config:
+      code: JTBBZGVmJTIwbWFpbihkYXRhc2V0X2lkcyUzQSUyMHN0ciklMjAtJTNFJTIwZGljdCUzQSUwQSUyMCUyMCUyMCUyMHJldHVybiUyMCU3QiUwQSUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMCUyMnJlc3VsdCUyMiUzQSUyMGRhdGFzZXRfaWRzLnNwbGl0KCUyMiUyQyUyMiklMjBpZiUyMGRhdGFzZXRfaWRzJTIwZWxzZSUyMCU1QiU1RCUyQyUwQSUyMCUyMCUyMCUyMCU3RCUwQQ==
+      input_variables:
+      - name: dataset_ids
+        variable: '{{start.dataset_ids}}'
+      language: python3
+      output_variables:
+      - name: result
+        type: array[string]
+    cycle: null
+    description: null
+    error_handling: null
+    id: code-split
+    name: 拆分知识库ID
+    position:
+      x: 170.0
+      y: 188.0
+    type: code
+  - cache: null
+    config:
+      variables:
+      - default: ''
+        description: selected_domain
+        max_length: 48
+        name: selected_domain
+        required: false
+        type: string
+        value: ''
+      - default: ''
+        description: dataset_ids
+        max_length: 256
+        name: dataset_ids
+        required: false
+        type: string
+        value: ''
+    cycle: null
+    description: null
+    error_handling: null
+    id: start
+    name: 开始
+    position:
+      x: -290.0
+      y: 176.0
+    type: start
+  - cache: null
+    config:
+      auth:
+        auth_type: none
+      body:
+        content_type: json
+        data: "{\n  \"query\": \"{{sys.message}}\",\n  \"kb_ids\": [],\n  \"ex_ids\"\
+          :[\"{{iteration.item}}\"],\n  \"similarity_threshold\": 0.1,\n  \"vector_similarity_weight\"\
+          : 0.3,\n  \"top_k\": 10,\n  \"retrieve_type\": \"hybrid\"\n}"
+      error_handle:
+        method: none
+      headers:
+        authorization: Bearer sk-service-Lo1zR1ePaxPc5xp00aVIW0uquLcUxgVk
+      method: POST
+      params: {}
+      retry:
+        enable: false
+      timeouts: {}
+      url: https://memorybear.redbearai.com/v1/chunks/retrieval
+      verify_ssl: false
+    cycle: null
+    description: null
+    error_handling: null
+    id: http_request_1779432449031_ux9hfyylg
+    name: HTTP请求
+    position:
+      x: 272.3297424316406
+      y: 613.0604248046875
+    type: http-request
+  - cache: null
+    config:
+      flatten: false
+      input: '{{code-split.result}}'
+      output: '{{sys.message}}'
+      output_type: string
+      parallel: false
+      parallel_count: 10
+    cycle: null
+    description: null
+    error_handling: null
+    id: iteration_1779433206572_0dkdbuvxn
+    name: 迭代 (Iteration)
+    position:
+      x: 626.090576171875
+      y: 198.24054429688596
+    type: iteration
+  - cache: null
+    config: {}
+    cycle: iteration_1779433206572_0dkdbuvxn
+    description: null
+    error_handling: null
+    id: cycle_start_1779433206573_8gyk7p9s5
+    name: null
+    position:
+      x: 650.090576171875
+      y: 268.24054429688596
+    type: cycle-start
+  triggers: []
+  variables: []

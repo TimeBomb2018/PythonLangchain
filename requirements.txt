@@ -1,0 +1,35 @@
+# LangChain生态（多Agent核心）
+langchain==1.2.6
+langchain-core==1.2.11
+langchain-community==0.4.1
+langchain-openai==1.1.7
+langgraph-cli[inmem]==0.2.10
+langgraph-api==0.5.10
+
+# 基础工具
+dotenv==0.9.9
+openai==2.15.0
+pydantic==2.11.10
+zhipuai==2.1.5.20250825
+volcengine-python-sdk[ark]==5.0.19
+
+# 数据处理
+pandas==2.2.2
+numpy==1.26.4
+matplotlib==3.8.4
+
+# PDF处理
+pdfplumber==0.11.9
+
+# 数据库
+sqlalchemy==2.0.46
+pymysql==1.1.2
+
+# 日志
+loguru==0.7.3
+
+# 界面
+gradio==5.31.0
+
+# 音频处理
+soundfile==0.13.1
