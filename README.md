@@ -180,7 +180,7 @@ brew install uv                                    # macOS / Linux（Homebrew）
 # 或使用官方脚本：curl -LsSf https://astral.sh/uv/install.sh | sh
 
 # 创建并激活虚拟环境（uv 会自动下载缺失的 Python 3.12）
-uv venv --python 3.12
+uv venv --python 3.12 .venv
 source .venv/bin/activate        # Windows: .venv\Scripts\activate
 
 # 安装依赖（uv pip 作用于当前激活的虚拟环境）
