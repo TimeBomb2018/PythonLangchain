@@ -172,14 +172,29 @@ flowchart LR
 
 ### 1. 安装依赖
 
-需要 Python ≥ 3.12：
+需要 Python ≥ 3.12，推荐用 [uv](https://docs.astral.sh/uv/) 管理虚拟环境与依赖：
+
+```bash
+# 安装 uv（已安装可跳过）
+brew install uv                                    # macOS / Linux（Homebrew）
+# 或使用官方脚本：curl -LsSf https://astral.sh/uv/install.sh | sh
+
+# 创建并激活虚拟环境（uv 会自动下载缺失的 Python 3.12）
+uv venv --python 3.12
+source .venv/bin/activate        # Windows: .venv\Scripts\activate
+
+# 安装依赖（uv pip 作用于当前激活的虚拟环境）
+uv pip install -r requirements.txt  # 全部运行依赖
+uv pip install -e .                 # 可编辑安装本项目，提供 agent 包
+```
+
+不使用 uv 时，标准库 venv + pip 的等价写法：
 
 ```bash
 python3.12 -m venv .venv
-source .venv/bin/activate        # Windows: .venv\Scripts\activate
-
-pip install -r requirements.txt  # 全部运行依赖
-pip install -e .                 # 可编辑安装本项目，提供 agent 包
+source .venv/bin/activate
+pip install -r requirements.txt
+pip install -e .
 ```
 
 ### 2. 配置环境变量
